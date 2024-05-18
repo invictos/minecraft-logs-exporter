@@ -6,13 +6,17 @@ const moment = require('moment');
 
 const DEFAULT_DAYS = 100;
 
-const LOGS_PATH = process.env.MCO11Y_LOGS_PATH || '../../logs';
+const LOGS_PATH = process.env.MCO11Y_LOGS_PATH || path.join(__dirname, '../../logs');
 
-console.log(`Logs path: ${path.join(__dirname, LOGS_PATH)}`);
+console.log(`Logs path: ${LOGS_PATH}`);
 
 async function handlerLogs(req, res){
     const { X } = req.params;
     const days = parseInt(X);
+
+    if(!fs.existsSync(LOGS_PATH)){
+        return res.status(500).send('Logs path does not exist');
+    }
 
     const logs = await getLogs(days || DEFAULT_DAYS);
     res.send(logs.join('\n'));
@@ -21,6 +25,10 @@ async function handlerLogs(req, res){
 async function handlerPlayerActivity(req, res){
     const { X } = req.params;
     const days = parseInt(X);
+
+    if(!fs.existsSync(LOGS_PATH)){
+        return res.status(500).send('Logs path does not exist');
+    }
 
     const logs = await getLogs(days || DEFAULT_DAYS);
 
@@ -32,7 +40,8 @@ async function handlerPlayerActivity(req, res){
 }
 
 async function getLogs(days){
-    const logsDir = path.join(__dirname, LOGS_PATH);
+    const logsDir = LOGS_PATH;
+
     let files = fs.readdirSync(logsDir);
     let logs = [];
 
