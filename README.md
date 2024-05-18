@@ -37,5 +37,5 @@ This is a simple tool to read Minecraft logs and exposes them on a HTTP server.
 MCO11Y_HOST=foobar.net MCO11Y_PORT=2999 MCO11Y_AUTH_ENABLED=true MCO11Y_AUTH_USER=toto MCO11Y_AUTH_PASSWORD=toto node index.js
 
 # Docker
-docker run -d -p 3000:3000 -e MCO11Y_HOST=foobar.net -e MCO11Y_PORT=2999 -e MCO11Y_AUTH_ENABLED=true -e MCO11Y_AUTH_USER=toto -e MCO11Y_AUTH_PASSWORD=toto --mount type=bind,source=$(pwd)/logs,target=/app/mclogs,readonly minecraft-logs-exporter
+docker run -d -p 3000:3000 -e MCO11Y_HOST=foobar.net -e MCO11Y_PORT=3000 -e MCO11Y_AUTH_ENABLED=true -e MCO11Y_AUTH_USER=toto -e MCO11Y_AUTH_PASSWORD=toto --mount type=bind,source=$(pwd)/logs,target=/app/mclogs,readonly minecraft-logs-exporter
 ```
