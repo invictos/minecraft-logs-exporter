@@ -1,0 +1,12 @@
+services:
+  app:
+    image: minecraft-logs-exporter:latest
+    volumes:
+      - ./logs:/app/mclogs:ro
+    ports:
+      - 8080:3000
+    environment:
+      - MCO11Y_HOST=hypixel.net
+      - MCO11Y_AUTH_ENABLED=true
+      - MCO11Y_AUTH_USER=admin
+      - MCO11Y_AUTH_PASSWORD=admin
